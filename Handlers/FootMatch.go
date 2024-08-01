@@ -9,12 +9,12 @@ import (
 )
 
 var (
-	games []models.Play
+	games []models.Match
 	//mu sync.Mutex
 )
 
-func AddGame(c echo.Context) error {
-	var game models.Play
+func AddMatch(c echo.Context) error {
+	var game models.Match
 	if err := c.Bind(&game); err != nil {
 		return err
 	}
@@ -28,7 +28,7 @@ return c.JSON(http.StatusCreated, game)
 
 }
 
-func GetGames(c echo.Context) error {
+func GetMatch(c echo.Context) error {
 	//mu.Lock()
 	//defer mu.Unlock()
 

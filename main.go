@@ -13,8 +13,8 @@ func main() {
 	e.Use(middleware.Recover())
 
 //Rotas 
-e.POST("/games", handlers.AddGame)
-e.GET("/games", handlers.GetGames)
+e.POST("/games/addmatch", handlers.AddMatch)
+e.GET("/games/getmatch", handlers.GetMatch)
 
 e.Logger.Fatal(e.Start(":8080"))
 

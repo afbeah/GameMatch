@@ -2,7 +2,7 @@ package models
 
 import()
 
-type Play struct {
+type Match struct {
 	ID int `json:"id"`
 	Name string `json:"name"`
 	Stadium string `json:"stadium"`
