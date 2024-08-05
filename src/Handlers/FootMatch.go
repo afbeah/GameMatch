@@ -2,16 +2,14 @@ package handlers
 
 import (
 	"net/http"
-	//"sync"
 
 	"github.com/labstack/echo/v4"
-	models "GamesInsertion/Models"
+	models "GamesInsertion/src/Models"
 )
 
-var (
-	games []models.Match
-	//mu sync.Mutex
-)
+type Games struct{
+	game []models.Match
+}
 
 func AddMatch(c echo.Context) error {
 	var game models.Match
@@ -19,18 +17,11 @@ func AddMatch(c echo.Context) error {
 		return err
 	}
 
-//mu.Lock()
-game.ID = len(games) + 1
-games = append(games, game)
-//mu.Unlock()
-
 return c.JSON(http.StatusCreated, game)
 
 }
 
 func GetMatch(c echo.Context) error {
-	//mu.Lock()
-	//defer mu.Unlock()
-
-	return c.JSON(http.StatusOK, games)
+	var game models.Match
+	return c.JSON(http.StatusOK, game)
 }
