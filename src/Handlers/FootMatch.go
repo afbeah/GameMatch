@@ -3,12 +3,20 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/labstack/echo/v4"
 	models "GamesInsertion/src/Models"
+
+	"github.com/labstack/echo/v4"
 )
 
-type Games struct{
+type Games struct {
 	game []models.Match
+}
+
+// Healthcheck
+func HealthCheck(c echo.Context) error {
+	return c.JSON(http.StatusOK, map[string]string{
+		"status": "UP",
+	})
 }
 
 func AddMatch(c echo.Context) error {
@@ -17,7 +25,7 @@ func AddMatch(c echo.Context) error {
 		return err
 	}
 
-return c.JSON(http.StatusCreated, game)
+	return c.JSON(http.StatusCreated, game)
 
 }
 

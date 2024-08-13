@@ -1,11 +1,10 @@
 package main
 
-import(
+import (
+	handlers "GamesInsertion/src/Handlers"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	handlers "GamesInsertion/src/Handlers"
 	"go.uber.org/zap"
-
 )
 
 func main() {
@@ -22,10 +21,13 @@ func main() {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
-//Rotas 
-e.POST("/games/addmatch", handlers.AddMatch)
-e.GET("/games/getmatch", handlers.GetMatch)
+	//Rotas
+	e.POST("/games/addmatch", handlers.AddMatch)
+	e.GET("/games/getmatch", handlers.GetMatch)
 
-e.Logger.Fatal(e.Start(":8080"))
+	//Rota para o Healthcheck
+	e.GET("/health", handlers.HealthCheck)
+
+	e.Logger.Fatal(e.Start(":8080"))
 
 }
