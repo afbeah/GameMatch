@@ -2,9 +2,7 @@ package handlers
 
 import (
 	"net/http"
-
 	models "GamesInsertion/src/Models"
-
 	"github.com/labstack/echo/v4"
 )
 
