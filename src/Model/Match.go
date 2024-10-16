@@ -9,6 +9,5 @@ type Match struct{
 	VisitingTeam string `json:"visitingteam"`
 	Stadium string `json:"stadium"`
 	ScoreBoard string `json:"scoreboard"`
-	Referee string `json:"referee"`
 	Note string `json:"note"`
 }
