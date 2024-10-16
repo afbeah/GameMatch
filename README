@@ -17,7 +17,7 @@ Cliente HTTP para testes: Insomnia ou Postman
 
 1. Clone o repositório:
 
--- git clone https://github.com/seu-usuario/BooksList.git --
+-- git clone git@github.com:afbeah/GameMatch.git --
 cd GameMatch
 
 2. Instale as dependências:
@@ -40,7 +40,7 @@ Retorna o status de saúde a API
 
 -- GET /matchs/:id
 Retorna uma partida específica pelo ID
-// GET http://localhost:8080/books/1
+// GET http://localhost:8088/matchs/1
 
 -- POST /matchs/
 Retorna a inclusão de um jogo.
