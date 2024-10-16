@@ -18,7 +18,7 @@ Cliente HTTP para testes: Insomnia ou Postman
 1. Clone o repositório:
 
 -- git clone https://github.com/seu-usuario/BooksList.git --
-cd GameList
+cd GameMatch
 
 2. Instale as dependências:
 
@@ -27,7 +27,7 @@ cd GameList
 3. Inicie o servidor:
 
 -- go run main.go --
-O servidor estará disponível em http://localhost:8080.
+O servidor estará disponível em http://localhost:8088.
 
 # Endpoints
 
@@ -36,32 +36,32 @@ O servidor estará disponível em http://localhost:8080.
 -- GET /health
 Retorna o status de saúde a API
 
-2. Books
+2. Matchs
 
--- GET /books/:id
-Retorna um livro específico pelo ID
+-- GET /matchs/:id
+Retorna uma partida específica pelo ID
 // GET http://localhost:8080/books/1
 
--- POST /books/
-Retorna a inclusão de um livro.
+-- POST /matchs/
+Retorna a inclusão de um jogo.
 
--- PUT /books/
-Atualiza um livro existente.
+-- PUT /matchs/
+Atualiza uma partida existente.
 
--- DELETE /books/:id
-Deleta um livro existente.
+-- DELETE /matchs/:id
+Deleta uma partida específica existente.
 
 # Estrutura do Projeto 
 
-BooksList/
+GameMatch/
 │
 ├── src/
 │   ├── handler/
-│   │   └── bookHandler.go
+│   │   └── GameMatch.go
 │   ├── model/
-│   │   └── BookList.go
+│   │   └── Match.go
 │   ├── service/
-│      └── book_service.go
+│      └── GameMatch_service.go
 │   
 │
 ├── main.go
