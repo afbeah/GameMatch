@@ -7,9 +7,9 @@ import (
 
 // Criação do Service
 type MatchService interface {
-	AddGame(book *model.Match) error
+	AddGame(match *model.Match) error
 	GetGame(id int) (*model.Match, error)
-	UpdateGame(book *model.Match) error
+	UpdateGame(match *model.Match) error
 	DeleteGame(id int) error
 }
 
@@ -27,7 +27,7 @@ func NewMatchService() MatchService {
 // informa se o livro já existe no sistema
 func (s *matchService) AddGame(match *model.Match) error {
 	if _, exists := s.matchs[match.ID]; exists {
-		return errors.New("book already exists")
+		return errors.New("game already exists")
 	}
 	s.matchs[match.ID] = match
 	return nil
