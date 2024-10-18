@@ -22,7 +22,8 @@ func main() {
 	//Criando instancia do Echo
 	e := echo.New()
 	e.Use(middleware.Logger())
-	//e.Use(middleware.Recover())
+	e.Use(middleware.Recover())
+	e.Use(middleware.CORS())
 
 	//Criando Service e Handler
 	matchService := service.NewMatchService()
