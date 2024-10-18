@@ -1,9 +1,10 @@
 package main
 
 import (
-	"GamesInsertion/src/Handler"
-	"GamesInsertion/src/Service"
+	handler "GamesInsertion/src/Handler"
+	service "GamesInsertion/src/Service"
 	"net/http"
+
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"go.uber.org/zap"
@@ -21,7 +22,7 @@ func main() {
 	//Criando instancia do Echo
 	e := echo.New()
 	e.Use(middleware.Logger())
-	e.Use(middleware.Recover())
+	//e.Use(middleware.Recover())
 
 	//Criando Service e Handler
 	matchService := service.NewMatchService()

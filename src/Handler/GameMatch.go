@@ -1,8 +1,8 @@
 package handler
 
 import (
-	service "GamesInsertion/src/Service"
 	model "GamesInsertion/src/Model"
+	service "GamesInsertion/src/Service"
 	"net/http"
 	"strconv"
 
@@ -26,6 +26,7 @@ func HealthCheck(c echo.Context) error {
 
 func (h *MatchHandler) AddGame(c echo.Context) error {
 	var match model.Match
+
 	if err := c.Bind(&match); err != nil {
 		return c.JSON(http.StatusBadRequest, map[string]string{"error": "Invalid data"})
 	}
