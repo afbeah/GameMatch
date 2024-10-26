@@ -17,7 +17,6 @@ func NewMatchHandler(s service.MatchService) *MatchHandler {
 	return &MatchHandler{Service: s}
 }
 
-// HealthCheck
 func HealthCheck(c echo.Context) error {
 	return c.JSON(http.StatusOK, map[string]string{
 		"status": "UP",
@@ -76,4 +75,12 @@ func (h *MatchHandler) DeleteGame(c echo.Context) error {
 	}
 
 	return c.NoContent(http.StatusNoContent)
+}
+
+func (h *MatchHandler) ListGames(c echo.Context) error {
+    matches, err := h.Service.GetAllGames()
+    if err != nil {
+        return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Could not retrieve games"})
+    }
+    return c.JSON(http.StatusOK, matches) 
 }

@@ -3,57 +3,59 @@ package service
 import (
 	model "GamesInsertion/src/Model"
 	"errors"
+	"gorm.io/gorm"
 )
 
-// Criação do Service
 type MatchService interface {
 	AddGame(match *model.Match) error
 	GetGame(id int) (*model.Match, error)
 	UpdateGame(match *model.Match) error
 	DeleteGame(id int) error
+	GetAllGames() ([]*model.Match, error)
 }
 
-// Utilizando o map para armazenamento em memória (futuramente usar um BD?)
-type matchService struct {
-	matchs map[int]*model.Match
+type matchService struct{
+	db *gorm.DB
 }
 
-func NewMatchService() MatchService {
-	return &matchService{
-		matchs: make(map[int]*model.Match),
-	}
+func NewMatchService(db *gorm.DB) MatchService {
+	return &matchService{db: db}
 }
 
-// informa se o livro já existe no sistema
 func (s *matchService) AddGame(match *model.Match) error {
-	if _, exists := s.matchs[match.ID]; exists {
-		return errors.New("game already exists")
+	if err := s.db.Create(match).Error; err != nil{
+		return errors.New("failed to add game")
 	}
-	s.matchs[match.ID] = match
 	return nil
 }
 
-// Informa se o livro não foi encontrado no sistema
+
 func (s *matchService) GetGame(id int) (*model.Match, error) {
-	match, exists := s.matchs[id]
-	if !exists {
+	var match model.Match
+	if err := s.db.First(&match, id).Error; err != nil{
 		return nil, errors.New("game not found")
 	}
-	return match, nil
+	return &match, nil
 }
 
 func (s *matchService) UpdateGame(match *model.Match) error {
-	if _, exists := s.matchs[match.ID]; !exists {
-		return errors.New("game not found")
-	}
-	s.matchs[match.ID] = match
+if err := s.db.Save(match).Error; err != nil{
+	return errors.New("failed to update game")
+}
 	return nil
 }
 
 func (s *matchService) DeleteGame(id int) error {
-	if _, exists := s.matchs[id]; !exists {
-		return errors.New("game not found")
-	}
-	delete(s.matchs, id)
+if err := s.db.Delete(&model.Match{}, id).Error; err != nil{
+	return errors.New("game not found")
+}
 	return nil
+}
+
+func (s *matchService) GetAllGames() ([]*model.Match, error) {
+    var matches []*model.Match
+    if err := s.db.Find(&matches).Error; err != nil {
+        return nil, err
+    }
+    return matches, nil
 }
