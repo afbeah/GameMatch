@@ -27,11 +27,12 @@ func (h *MatchHandler) AddGame(c echo.Context) error {
 	var match model.Match
 
 	if err := c.Bind(&match); err != nil {
-		return c.JSON(http.StatusBadRequest, map[string]string{"error": "Invalid data"})
+		return echo.NewHTTPError(http.StatusBadRequest, "Invalid input data")
 	}
 
 	if err := h.Service.AddGame(&match); err != nil {
-		return c.JSON(http.StatusConflict, map[string]string{"error": err.Error()})
+		// Verifica se ocorreu algum erro ao tentar adicionar o jogo
+		return echo.NewHTTPError(http.StatusInternalServerError, "Error adding game")
 	}
 
 	return c.JSON(http.StatusCreated, match)
